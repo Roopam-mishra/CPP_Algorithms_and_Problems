@@ -1,3 +1,6 @@
+/* question link:  https://www.spoj.com/problems/HISTOGRA/   */
+***************************************************************
+
 #include<bits/stdc++.h>
 using namespace std;
 long long int maxarea(long long int a[],long long int n)
