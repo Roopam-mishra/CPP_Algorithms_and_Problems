@@ -1,3 +1,6 @@
+/* question link: https://www.codechef.com/problems/AMSGAME2 */
+***************************************************************
+
 #include<iostream>
 using namespace std;
 typedef long long int ll;
