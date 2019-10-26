@@ -1,3 +1,6 @@
+/* question link:  https://www.codechef.com/problems/CAKEDOOM  */
+*****************************************************************
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
