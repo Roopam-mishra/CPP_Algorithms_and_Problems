@@ -1,3 +1,6 @@
+/* question link: https://www.codechef.com/problems/MMPROD */
+***********************************************************
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
