@@ -1,4 +1,4 @@
-                    40daysof_CODE_CHALLENGE 
+                    40_days_of_code
 List of Algorithms for the code challenge:
       
 1.	Greedy Algorithms
