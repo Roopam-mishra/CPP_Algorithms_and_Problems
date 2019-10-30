@@ -11,37 +11,40 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    ll n,a,b,i,j;
-    cin>>n;
+    ll n,m,i,c,a,b,f,x,h,j;
+    cin>>n>>m;
     vector<ll> adj[n+1];
-    for(i=0;i<n-1;i++)
+    for(i=0;i<m;i++)
     {
         cin>>a>>b;
         adj[a].push_back(b);
         adj[b].push_back(a);
     }
-    queue<ll> q;
-    q.push(1);
-    cout<<1<<" ";
     ll visited[n+1];
     for(i=0;i<=n;i++)
     visited[i]=0;
-    ll level[n+1];
-    level[1]=1;
     visited[1]=1;
-    while(!q.empty())
+    stack<ll> s;
+    s.push(1);
+    cout<<1<<" ";
+    c=1;
+    while(!s.empty())
     {
-        ll x=q.front();
+        x=s.top();
+        f=0;
         for(i=0;i<adj[x].size();i++)
         {
             if(visited[adj[x][i]]==0)
             {
-                level[adj[x][i]]=level[x]+1;
-                visited[adj[x][i]]=1;
-                q.push(adj[x][i]);
+                f=1;
+                s.push(adj[x][i]);
                 cout<<adj[x][i]<<" ";
+                visited[adj[x][i]]=1;
+                c++;
             }
         }
-        q.pop();
+        if(f==0)
+        s.pop();
     }
+    return 0;
 }
