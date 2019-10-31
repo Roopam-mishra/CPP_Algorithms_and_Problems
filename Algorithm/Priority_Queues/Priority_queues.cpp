@@ -52,7 +52,7 @@ int main ()
 }
 
 
-/* CREATES A MAX HEAP */
+/* CREATES A MIN HEAP */
 ************************
 
 #include <iostream> 
