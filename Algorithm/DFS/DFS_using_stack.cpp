@@ -41,6 +41,7 @@ int main()
                 cout<<adj[x][i]<<" ";
                 visited[adj[x][i]]=1;
                 c++;
+                break;
             }
         }
         if(f==0)
