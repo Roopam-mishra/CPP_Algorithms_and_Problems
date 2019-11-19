@@ -69,7 +69,7 @@ int main()
         for(i=0;i<n;i++)
         {
             cin>>b;
-            if(binary_search(vect.begin(),vect.end(),b);
+            if(binary_search(vect.begin(),vect.end(),b))
             c++;
         }
         cout<<c<<endl;
