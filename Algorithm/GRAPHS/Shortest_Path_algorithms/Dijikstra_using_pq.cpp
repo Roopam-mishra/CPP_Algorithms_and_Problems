@@ -1,4 +1,4 @@
-/* Dijkstra using Priority Queue is somewhat faster than that using sets *
+/* Dijkstra using Priority Queue is somewhat faster than that using sets */
 
 #include <bits/stdc++.h>
 using namespace std;
