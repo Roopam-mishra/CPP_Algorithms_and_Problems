@@ -1,83 +1,56 @@
-/* addition at a particular postion in the array using segment trees.
-   finding the sum of the given range*/
-   
+// Written By Dheeraj Maurya
+// Btech student IET CSE (2018 - 2022)
+// segment tree with range query and range update
+
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long int ll;
-void build(ll a[],ll v,ll low,ll high,ll t[])
-{
-    if(low==high)
-    {
-        t[v]=a[low];
-    }
-    else
-    {
-        ll mid=(low+high)/2;
-        build(a,2*v+1,low,mid,t);
-        build(a,2*v+2,mid+1,high,t);
-        t[v]=t[2*v+1]+t[v*2+2];
+typedef int ll;
+const int N = 10005;
+ll seg[4*N] , lazy[4*N];
+
+void check(ll v,ll l,ll r){
+    if(lazy[v]!=-1){
+        seg[v] = lazy[v]*(r-l+1);
+        if(l!=r) lazy[2*v] = lazy[2*v+1] = lazy[v]; lazy[v] =-1;
     }
 }
-void update(ll v,ll low,ll high,ll pos,ll value,ll t[])
-{
-    if(low==high)
-    {
-        t[v]=value;
-    }
-    else
-    {
-        ll mid=(low+high)/2;
-        if(pos<=mid)
-        update(2*v+1,low,mid,pos,value,t);
-        else
-        update(2*v+2,mid+1,high,pos,value,t);
-        t[v]=t[v*2+1]+t[v*2+2];
-    }
+
+void rupdate(ll v,ll s,ll e,ll l,ll r,ll val){
+    check(v,s,e);
+    if(s>r || e<l)return ;
+    if(s>=l && e<=r){
+       seg[v] = (e - s + 1)*val;
+       if(s!=e) lazy[2*v] = lazy[2*v+1] = val;
+       return ;
+    } 
+    ll mid = (s+e)>>1;
+    rupdate(2*v,s,mid,l,r,val);    rupdate(2*v+1,mid+1,e,l,r,val);
+    seg[v] = seg[2*v] + seg[2*v+1];
 }
-ll sum(ll v,ll low,ll high,ll l,ll r,ll t[])
-{
-    if(l>r)
-    return 0;
-    else
-    if(l==low && r==high)
-    {
-        return t[v];
-    }
-    else
-    {
-        ll mid=(low+high)/2;
-        return sum(2*v+1,low,mid,l,min(mid,r),t)+sum(2*v+2,mid+1,high,max(l,mid+1),r,t);
-    }
+
+ll query(ll v,ll s,ll e,ll l,ll r){
+    check(v,s,e);
+    if(s>r || e<l)return 0;
+    if(s>=l && e<=r)return seg[v];
+    ll mid = (s+e)>>1;
+    return  query(2*v,s,mid,l,r) +  query(2*v+1,mid+1,e,l,r);
 }
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    ll n,i,j,q,m,pos,value,l,r;
-    cin>>n;
-    ll a[n];
-    ll size=pow(2,ceil(log2(n))+1);
-    ll t[size];
-    for(i=0;i<n;i++)
-    {
-        cin>>a[i];
-    }
-    build(a,0,0,n-1,t);
-    cin>>q;
-    for(i=0;i<q;i++)
-    {
-        /*cin>>m;
-        if(m==1)
-        {
-            cin>>pos>>value;
-            update(0,0,n-1,pos-1,value,t);
-        }
-        else
-        if(m==2)
-        {*/
-            cin>>l>>r;
-            cout<<sum(0,0,n-1,l-1,r-1,t)<<endl;
-        //}
-    }
+
+int main(){
+    ios::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+    ll n,i,l,r,val;
+    // here we take range of 10000
+    n = 10000;   
+    memset(lazy,-1,sizeof(lazy));
+
+    // initially all elements have initialize with zero
+
+    // add 5 to range 4 to 11
+    l = 4, r= 11,val=5;
+    rupdate(1,1,n,l,r,val);   
+    
+    // output the sum of range 3 to 7
+    l = 3, r =7; 
+    cout<< query(1,1,n,l,r)<<"\n";
+     
 }
